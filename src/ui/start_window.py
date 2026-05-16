@@ -23,12 +23,12 @@ class StartWindow:
 
         with dpg.file_dialog(
             tag="open_project_dialog",
-            directory_selector=False,
+            directory_selector=True,
             show=False,
             width=700,
             height=400,
             callback=self._on_open_project_selected,
-            label="Выберите файл проекта",
+            label="Выберите папку проекта",
         ):
             dpg.add_file_extension(".catalyst", color=(150, 150, 150))
 

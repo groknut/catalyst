@@ -28,7 +28,16 @@ class ProjectManager:
     def open_project(self, file_path: Path | str, node_factory):
 
         path = Path(file_path)
+
+        if path.is_dir():
+            catalyst_file = path / "project.catalyst"
+            if not catalyst_file.exists():
+                self.logger.error(f"В папке {path} нет project.catalyst")
+                return False
+            path = catalyst_file
+
         if not path.exists():
+            self.logger.error(f"Файл проекта не найден: {path}")
             return False
 
         data = json.loads(path.read_text(encoding="utf-8"))
