@@ -1,0 +1,11 @@
+site_name: Catalyst
+site_description: Визуальный редактор графов для хемоинформатики
+
+theme:
+    name: material
+    language: ru
+
+nav:
+    - Главная: index.md
+    - Узлы: nodes.md
+    - Демонстрация: projects.md
