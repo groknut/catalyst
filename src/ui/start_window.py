@@ -1,8 +1,8 @@
 import dearpygui.dearpygui as dpg
 import webbrowser
 
-class StartWindow:
 
+class StartWindow:
     def __init__(self, app_callback):
         self.tag = "start_window"
         self.on_launch = app_callback
@@ -14,9 +14,10 @@ class StartWindow:
             tag="new_project_dialog",
             directory_selector=True,
             show=False,
-            width=700, height=400,
+            width=700,
+            height=400,
             callback=self._on_new_project_selected,
-            label="Выберите папку для нового проекта"
+            label="Выберите папку для нового проекта",
         ):
             dpg.add_file_extension(".*", color=(150, 150, 150))
 
@@ -24,9 +25,10 @@ class StartWindow:
             tag="open_project_dialog",
             directory_selector=False,
             show=False,
-            width=700, height=400,
+            width=700,
+            height=400,
             callback=self._on_open_project_selected,
-            label="Выберите файл проекта"
+            label="Выберите файл проекта",
         ):
             dpg.add_file_extension(".catalyst", color=(150, 150, 150))
 
@@ -44,21 +46,38 @@ class StartWindow:
             no_title_bar=True,
             no_resize=True,
             no_move=True,
-            width=800, height=800
+            width=800,
+            height=800,
         ):
             with dpg.group(tag="launcher_layout"):
                 dpg.add_text("CATALYST")
                 dpg.add_text("Get started:")
-                dpg.add_button(label="New project", width=self.width,
-                               callback=lambda: dpg.show_item("new_project_dialog"))
-                dpg.add_button(label="Open project", width=self.width,
-                               callback=lambda: dpg.show_item("open_project_dialog"))
+                dpg.add_button(
+                    label="New project",
+                    width=self.width,
+                    callback=lambda: dpg.show_item("new_project_dialog"),
+                )
+                dpg.add_button(
+                    label="Open project",
+                    width=self.width,
+                    callback=lambda: dpg.show_item("open_project_dialog"),
+                )
                 dpg.add_spacer(height=10)
                 dpg.add_text("Resources:")
-                dpg.add_button(label="Github Repository", width=self.width,
-                               callback=lambda: webbrowser.open("https://github.com/groknut/catalyst"))
-                dpg.add_button(label="Custom Node Repository", width=self.width,
-                               callback=lambda: webbrowser.open("https://github.com/groknut/catalyst"))
+                dpg.add_button(
+                    label="Github Repository",
+                    width=self.width,
+                    callback=lambda: webbrowser.open(
+                        "https://github.com/groknut/catalyst"
+                    ),
+                )
+                dpg.add_button(
+                    label="Custom Node Repository",
+                    width=self.width,
+                    callback=lambda: webbrowser.open(
+                        "https://github.com/groknut/catalyst"
+                    ),
+                )
 
         dpg.set_primary_window(self.tag, True)
         self.center_ui()
