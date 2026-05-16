@@ -1,6 +1,5 @@
 import logging
 import sys
-from pathlib import Path
 
 def setup_logging(config=None):
 
@@ -10,7 +9,7 @@ def setup_logging(config=None):
 
     if log_level == "OFF":
         logging.disable(logging.CRITICAL)
-        return logger.getLogger()
+        return logging.getLogger()
 
     root_logger = logging.getLogger()
     root_logger.setLevel(getattr(logging, log_level, logging.INFO))

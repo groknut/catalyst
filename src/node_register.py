@@ -2,8 +2,6 @@ import importlib
 import sys
 from pathlib import Path
 from core.base_node import BaseNode
-import sys
-import logging
 
 def load_all_nodes(config=None, nodes_folder=None):
 
