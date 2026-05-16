@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from core.node_manager import NodeManager
 
+
 class ProjectManager:
     def __init__(self, logger=None):
         self.node_manager = NodeManager(logger)
@@ -13,7 +14,7 @@ class ProjectManager:
         folder.mkdir(parents=True, exist_ok=True)
         self.current_file = folder / "project.catalyst"
         file = folder / "README.md"
-        file.write_text('\n# By Catalyst')
+        file.write_text("\n# By Catalyst")
 
         (folder / "input").mkdir(exist_ok=True)
         (folder / "output").mkdir(exist_ok=True)
@@ -40,7 +41,7 @@ class ProjectManager:
         (project_dir / "input").mkdir(exist_ok=True)
         (project_dir / "output").mkdir(exist_ok=True)
 
-        self.missed_types = getattr(self.node_manager, '_missed_types_in_last_load', [])
+        self.missed_types = getattr(self.node_manager, "_missed_types_in_last_load", [])
 
         if self.missed_types:
             self.logger.warning(f"Missing node types in project: {self.missed_types}")
@@ -54,10 +55,11 @@ class ProjectManager:
         self.current_file.parent.mkdir(parents=True, exist_ok=True)
         data = {
             "nodes": [node.serialize() for node in self.node_manager.nodes.values()],
-            "links": list(self.node_manager.links.items())
+            "links": list(self.node_manager.links.items()),
         }
-        self.logger.info(f"💾 Saving {len(self.node_manager.nodes)} nodes to {self.current_file}")
+        self.logger.info(
+            f"💾 Saving {len(self.node_manager.nodes)} nodes to {self.current_file}"
+        )
         self.current_file.write_text(
-            json.dumps(data, indent=2, ensure_ascii=False),
-            encoding="utf-8"
+            json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"
         )

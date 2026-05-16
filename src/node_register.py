@@ -3,6 +3,7 @@ import sys
 from pathlib import Path
 from core.base_node import BaseNode
 
+
 def load_all_nodes(config=None, nodes_folder=None):
 
     factory = {}
@@ -23,6 +24,7 @@ def load_all_nodes(config=None, nodes_folder=None):
         groups.setdefault(grp, []).append(name)
     return factory, groups
 
+
 def scan_directory(directory: Path, factory):
     if not directory.is_dir():
         return
@@ -36,10 +38,15 @@ def scan_directory(directory: Path, factory):
             mod = importlib.import_module(module_name)
             for attr in dir(mod):
                 obj = getattr(mod, attr)
-                if isinstance(obj, type) and issubclass(obj, BaseNode) and obj is not BaseNode:
+                if (
+                    isinstance(obj, type)
+                    and issubclass(obj, BaseNode)
+                    and obj is not BaseNode
+                ):
                     register_node_class(obj, factory)
         except Exception as e:
             print(f"Failed to load {module_name}: {e}")
+
 
 def register_node_class(cls, factory):
     if cls.__name__ not in factory:

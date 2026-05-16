@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def setup_logging(config=None):
 
     log_level = "INFO"
@@ -15,8 +16,7 @@ def setup_logging(config=None):
     root_logger.setLevel(getattr(logging, log_level, logging.INFO))
 
     fmt = logging.Formatter(
-        '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
-        datefmt='%Y-%m-%d %H:%M:%S'
+        "%(asctime)s [%(levelname)s] %(name)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
     )
 
     console = logging.StreamHandler(sys.stdout)

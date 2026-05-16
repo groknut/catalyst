@@ -1,6 +1,7 @@
 import dearpygui.dearpygui as dpg
 from .node_types import NodeTypes, TYPE_COLORS
 
+
 class BaseNode:
     group = "Ungrouped"
     description = ""
@@ -9,7 +10,7 @@ class BaseNode:
         self.manager = manager
         self.inputs = []
         self.outputs = []
-        self.pin_types = {}       # {pin_id: str}
+        self.pin_types = {}  # {pin_id: str}
 
         with dpg.node(label=label, pos=pos, parent=parent) as self.id:
             self.build_node()
@@ -55,5 +56,5 @@ class BaseNode:
             "pos": dpg.get_item_pos(self.id),
             "inputs": self.inputs,
             "outputs": self.outputs,
-            "params": self.get_params()
+            "params": self.get_params(),
         }

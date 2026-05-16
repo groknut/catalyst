@@ -1,6 +1,7 @@
 import dearpygui.dearpygui as dpg
 from .node_types import NodeTypes
 
+
 class NodeManager:
     def __init__(self, logger=None):
         self.nodes = {}
@@ -39,7 +40,11 @@ class NodeManager:
 
         out_type = out_node.pin_types.get(out_pin, NodeTypes.ANY)
         in_type = in_node.pin_types.get(in_pin, NodeTypes.ANY)
-        if out_type != NodeTypes.ANY and in_type != NodeTypes.ANY and out_type != in_type:
+        if (
+            out_type != NodeTypes.ANY
+            and in_type != NodeTypes.ANY
+            and out_type != in_type
+        ):
             return
         if in_pin in self.links:
             self.remove_link_by_pin(in_pin)
@@ -136,7 +141,9 @@ class NodeManager:
                 link_id = dpg.add_node_link(out_new, in_new, parent="main_editor")
                 self.add_link(out_new, in_new, link_id=link_id)
             else:
-                self.logger.warning(f"Skipping link {out_old}->{in_old}: pin mapping failed")
+                self.logger.warning(
+                    f"Skipping link {out_old}->{in_old}: pin mapping failed"
+                )
 
         self._missed_types_in_last_load = missed_types
         self.logger.info(f"Loaded {len(self.nodes)} nodes, {len(self.links)} links.")
