@@ -22,11 +22,11 @@ class Application:
         if getattr(sys, "frozen", False):
             base_path = Path(
                 __file__
-            ).parent  # __file__ теперь указывает на временную папку (благодаря runtime)
+            ).parent
         else:
             base_path = Path(
                 __file__
-            ).parent  # в режиме разработки — просто папка app.py
+            ).parent
 
         self.node_factory, self.groups = load_all_nodes(
             self.config, nodes_folder=base_path / "nodes"
@@ -61,7 +61,6 @@ class Application:
         dpg.setup_dearpygui()
 
         if self.open_file or self.init_dir:
-            # Сразу строим редактор (подготовить `main_editor`)
             self.main_window = MainWindow(
                 self.pm, self.node_factory, self.groups, self.config
             )
@@ -109,9 +108,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     if args.open and args.init:
-        print(
-            "⚠️ Warning: both --open and --init specified, opening file, ignoring --init."
-        )
+        print("Warning: both --open and --init specified, opening file, ignoring --init.")
         init_dir = None
     else:
         init_dir = args.init

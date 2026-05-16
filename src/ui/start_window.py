@@ -47,7 +47,7 @@ class StartWindow:
             no_resize=True,
             no_move=True,
             width=800,
-            height=800,
+            height=600,
         ):
             with dpg.group(tag="launcher_layout"):
                 dpg.add_text("CATALYST")
@@ -75,7 +75,7 @@ class StartWindow:
                     label="Custom Node Repository",
                     width=self.width,
                     callback=lambda: webbrowser.open(
-                        "https://github.com/groknut/catalyst"
+                        "https://github.com/groknut/catalyst_custom_nodes"
                     ),
                 )
 
