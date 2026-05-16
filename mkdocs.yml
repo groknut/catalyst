@@ -4,6 +4,8 @@ site_url: https://groknut.github.io/catalyst
 theme:
     name: simple-blog
     language: ru
+    logo: assets/icon.svg
+    favicon: assets/icon.ico
 
 nav:
     - Catalyst: index.md
