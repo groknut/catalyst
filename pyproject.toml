@@ -1,0 +1,11 @@
+[project]
+name = "catalyst"
+version = "0.1.0"
+description = "Interactive graphical designer for working with chemical data"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "dearpygui>=2.3.1",
+    "pyyaml>=6.0.3",
+    "rdkit>=2026.3.1",
+]
