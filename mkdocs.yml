@@ -7,5 +7,6 @@ theme:
 
 nav:
     - Catalyst: index.md
+    - Get started: get_started.md
     - Nodes: nodes.md
     - Demos: demos.md
