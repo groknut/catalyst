@@ -50,7 +50,7 @@ class MainWindow:
                     dpg.add_separator()
 
                     for grp, names in self.groups.items():
-                        with dpg.collapsing_header(label=grp, default_open=True):
+                        with dpg.collapsing_header(label=grp, default_open=False):
                             for name in names:
                                 cls = self.node_factory.get(name)
                                 if cls is None:
