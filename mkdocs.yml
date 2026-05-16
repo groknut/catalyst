@@ -1,6 +1,6 @@
 site_name: Catalyst
 site_description: Визуальный редактор графов для хемоинформатики
-
+site_url: https://groknut.github.io/catalyst
 theme:
     name: simple-blog
     language: ru
