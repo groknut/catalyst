@@ -4,6 +4,7 @@ from pathlib import Path
 import yaml
 from core.config import Config
 
+
 # ----------------------------------------------------------------
 #  Fixtures
 # ----------------------------------------------------------------
@@ -13,17 +14,21 @@ def temp_config_file(tmp_path):
     cfg_file = tmp_path / "config.yaml"
     return cfg_file
 
+
 # ----------------------------------------------------------------
 #  Tests
 # ----------------------------------------------------------------
 
+
 def test_default_config_with_explicit_path(temp_config_file):
     """Без файла – значения по умолчанию."""
-    cfg = Config(path=temp_config_file)   # используем временный путь
+    cfg = Config(path=temp_config_file)  # используем временный путь
     assert cfg.data["log_level"] == "INFO"
     assert cfg.data["log_file"] == str(Path.home() / ".catalyst" / "catalyst.log")
     # custom_nodes_dir по умолчанию – системный путь, но проверяем, что он заканчивается нужным фрагментом
-    assert cfg.data["custom_nodes_dir"].endswith(str(Path(".catalyst") / "custom_nodes"))
+    assert cfg.data["custom_nodes_dir"].endswith(
+        str(Path(".catalyst") / "custom_nodes")
+    )
 
 
 def test_load_existing_config(temp_config_file):
@@ -33,7 +38,7 @@ def test_load_existing_config(temp_config_file):
         "custom_nodes_dir: /my/custom/nodes\n"
         "log_level: DEBUG\n"
         "log_file: /var/log/catalyst.log\n",
-        encoding="utf-8"
+        encoding="utf-8",
     )
     cfg = Config(path=temp_config_file)
     assert cfg.data["custom_nodes_dir"] == "/my/custom/nodes"
@@ -74,6 +79,7 @@ def test_save_creates_parent_directories(temp_config_file):
     # Убедимся, что родительской папки нет
     if temp_config_file.parent.exists():
         import shutil
+
         shutil.rmtree(temp_config_file.parent)
     assert not temp_config_file.parent.exists()
     cfg = Config(path=temp_config_file)
