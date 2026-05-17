@@ -37,6 +37,14 @@ uv sync
 uv run src/app.py
 ```
 
+## Сборка из исходников
+```bash
+git clone https://github.com/groknut/catalyst
+cd catalyst
+uv sync
+uv add --dev zstandart nuitka
+uv run nuitka --standalone --onefile --windows-console-mode=disable --windows-icon-from-ico=assets/icon.ico  --enable-plugin=anti-bloat --assume-yes-for-downloads --output-filename=catalyst.exe --include-raw-dir=src/nodes=nodes --include-raw-dir=src/assets=assets --include-package=rdkit --include-package=numpy --include-package=PIL --lto=yes --remove-output --nofollow-import-to=tkinter,matplotlib,pandas,scipy,jupyter,IPython,sympy --file-reference-choice=runtime --no-deployment-flag=self-execution --onefile-tempdir-spec="{TEMP}\catalyst_XXXX" src/app.py
+```
 ---
 
 ## Запуск с аргументами
