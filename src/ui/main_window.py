@@ -92,6 +92,34 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Escape, callback=self._handle_escape)
             dpg.add_key_press_handler(dpg.mvKey_D, callback=self._handle_key_d)
             dpg.add_key_press_handler(dpg.mvKey_S, callback=self._handle_key_s)
+            dpg.add_key_press_handler(dpg.mvKey_Left, callback=self._handle_move_node)
+            dpg.add_key_press_handler(dpg.mvKey_Right, callback=self._handle_move_node)
+            dpg.add_key_press_handler(dpg.mvKey_Up, callback=self._handle_move_node)
+            dpg.add_key_press_handler(dpg.mvKey_Down, callback=self._handle_move_node)
+
+
+    def _handle_move_node(self, sender, app_data):
+        ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
+        shift = dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift)
+
+        if not (ctrl and shift):
+            return
+
+        dx, dy = 0, 0
+        if app_data == dpg.mvKey_Left:
+            dx = -20
+        elif app_data == dpg.mvKey_Right:
+            dx = 20
+        elif app_data == dpg.mvKey_Up:
+            dy = -20
+        elif app_data == dpg.mvKey_Down:
+            dy = 20
+        else:
+            return
+
+        for node_id in dpg.get_selected_nodes("main_editor"):
+            x, y = dpg.get_item_pos(node_id)
+            dpg.set_item_pos(node_id, (x + dx, y + dy))
 
     def _export_graph_image(self):
         if self.pm.current_file:
