@@ -26,13 +26,6 @@ class MainWindow:
         ):
             dpg.add_file_extension(".catalyst")
 
-        with dpg.viewport_menu_bar():
-            with dpg.menu(label="File"):
-                dpg.add_menu_item(label="Save", callback=self._save)
-                dpg.add_menu_item(
-                    label="Open...",
-                    callback=lambda: dpg.show_item("open_editor_dialog"),
-                )
 
         with dpg.window(
             tag="main_window",
@@ -43,6 +36,17 @@ class MainWindow:
             width=-1,
             height=-1,
         ):
+            with dpg.viewport_menu_bar():
+                with dpg.menu(label="File"):
+                    dpg.add_menu_item(label="Save", callback=self._save)
+                    dpg.add_menu_item(
+                        label="Open...",
+                        callback=lambda: dpg.show_item("open_editor_dialog"),
+                    )
+
+            dpg.add_spacer(height=15)
+
+
             with dpg.group(horizontal=True):
                 with dpg.child_window(width=220, border=True):
                     dpg.add_spacer(height=15)
@@ -73,7 +77,7 @@ class MainWindow:
                         dpg.add_text(f"● {t}", color=color)
 
                 with dpg.node_editor(
-                    tag="main_editor", callback=self._link_callback, width=-1, height=-1
+                    tag="main_editor", callback=self._link_callback, width=-1, height=-1, minimap=True, minimap_location=dpg.mvNodeMiniMap_Location_TopRight
                 ):
                     pass
 
