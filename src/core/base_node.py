@@ -1,5 +1,5 @@
 import dearpygui.dearpygui as dpg
-from .node_types import NodeTypes, TYPE_COLORS
+from .node_types import NodeTypes, TYPE_COLORS, GROUP_THEME
 
 
 class BaseNode:
@@ -12,9 +12,25 @@ class BaseNode:
         self.outputs = []
         self.pin_types = {}  # {pin_id: str}
 
+
         with dpg.node(label=label, pos=pos, parent=parent) as self.id:
             self.build_node()
         self.manager.register_node(self)
+
+        self._apply_group_theme()
+
+    def _apply_group_theme(self):
+        color = GROUP_THEME.get(self.group, (80, 80, 100))
+        with dpg.theme() as theme:
+            with dpg.theme_component(dpg.mvNode):
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered,
+                                    tuple(min(c+30, 255) for c in color),
+                                    category=dpg.mvThemeCat_Nodes)
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected,
+                                    tuple(min(c+50, 255) for c in color),
+                                    category=dpg.mvThemeCat_Nodes)
+        dpg.bind_item_theme(self.id, theme)
 
     def build_node(self):
         pass
