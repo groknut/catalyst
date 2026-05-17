@@ -1,6 +1,6 @@
 import dearpygui.dearpygui as dpg
 from core.node_types import TYPE_COLORS, NodeTypes
-
+from pathlib import Path
 
 class MainWindow:
     def __init__(
@@ -42,7 +42,9 @@ class MainWindow:
                     dpg.add_menu_item(
                         label="Open...",
                         callback=lambda: dpg.show_item("open_editor_dialog"),
-                    )
+                )
+                with dpg.menu(label="Edit"):
+                    dpg.add_menu_item(label="Export Graph Image", callback=self._export_graph_image)
 
             dpg.add_spacer(height=15)
 
@@ -89,6 +91,18 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Q, callback=self._handle_key_q)
             dpg.add_key_press_handler(dpg.mvKey_Escape, callback=self._handle_escape)
             dpg.add_key_press_handler(dpg.mvKey_D, callback=self._handle_key_d)
+            dpg.add_key_press_handler(dpg.mvKey_S, callback=self._handle_key_s)
+
+    def _export_graph_image(self):
+        if self.pm.current_file:
+            output_dir = Path(self.pm.current_file).parent / "output"
+        else:
+            output_dir = Path(".")
+        output_dir.mkdir(exist_ok=True)
+        path = output_dir / "graph.png"
+        dpg.output_frame_buffer(str(path))
+        print(f"Graph image saved to {path}")
+
 
     def _handle_escape(self):
         self._save()
@@ -101,17 +115,15 @@ class MainWindow:
 
     def _handle_key_s(self, sender, app_data):
         """Ctrl+S → сохранить проект."""
-        if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
+        shift = dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift)
+        ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
+        if shift and ctrl:
+            self._export_graph_image()
+        else:
             self._save()
-
-    def _autosave_callback(self, sender, app_data):
-        """Вызывается таймером каждые 60 секунд (если autosave включён)."""
-        if self.pm.current_file is not None:
-            self.pm.save_project()
 
     def _make_add_node_callback(self, node_class):
         """Возвращает коллбэк, который точно добавляет конкретный узел."""
-
         def callback(sender, app_data, user_data=None):
             self._add_node(node_class)
 
