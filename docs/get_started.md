@@ -1,11 +1,11 @@
 
 ## Установка
 
-### Из исходников
+### Сборка из исходников
 1. Склонируйте репозиторий:
 ```bash
-   git clone https://github.com/groknut/catalyst.git
-   cd catalyst
+git clone https://github.com/groknut/catalyst.git
+cd catalyst
 ```
 
 2. Установите зависимости с помощью `uv`:
@@ -28,9 +28,18 @@ log_file: ~\.catalyst\catalyst.log
 log_level: INFO
 ```
 
-Для указания своего конфига используйте флаг `--config`:
-```bash
-uv run src/app.py --config my_config.yaml
+## Управление
+
+### CLI-приложение (без лаунчера)
+```
+Catalyst Node Editor
+
+options:
+  -h, --help           show this help message and exit
+  -c, --config CONFIG  Path to YAML config file
+  -o, --open OPEN      Open project from .catalyst file
+  --init INIT          Create new project in the specified folder
+  -l, --list-nodes     Print available node types and exit
 ```
 
 ## Первый проект
