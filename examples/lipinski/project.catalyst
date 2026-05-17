@@ -1,0 +1,124 @@
+{
+  "nodes": [
+    {
+      "id": 175,
+      "type": "StickyNoteNode",
+      "label": "StickyNoteNode",
+      "pos": [
+        58,
+        72
+      ],
+      "inputs": [],
+      "outputs": [],
+      "params": {
+        "text": "Задача: определить, проходит ли молекула по \nправилам лекарственного подобия, \nи сохранить изображение, если проходит."
+      }
+    },
+    {
+      "id": 179,
+      "type": "SMILESInputNode",
+      "label": "SMILESInputNode",
+      "pos": [
+        50,
+        287
+      ],
+      "inputs": [],
+      "outputs": [
+        180,
+        182
+      ],
+      "params": {
+        "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      }
+    },
+    {
+      "id": 186,
+      "type": "RuleOfFiveFilterNode",
+      "label": "RuleOfFiveFilterNode",
+      "pos": [
+        391,
+        325
+      ],
+      "inputs": [
+        187
+      ],
+      "outputs": [
+        189,
+        191
+      ],
+      "params": {}
+    },
+    {
+      "id": 196,
+      "type": "IfNode",
+      "label": "IfNode",
+      "pos": [
+        818,
+        344
+      ],
+      "inputs": [
+        197,
+        199
+      ],
+      "outputs": [
+        201,
+        203
+      ],
+      "params": {}
+    },
+    {
+      "id": 207,
+      "type": "MolImageSaveNode",
+      "label": "MolImageSaveNode",
+      "pos": [
+        1055,
+        300
+      ],
+      "inputs": [
+        208
+      ],
+      "outputs": [],
+      "params": {
+        "filename": "passed.png",
+        "width": 300,
+        "height": 200
+      }
+    },
+    {
+      "id": 215,
+      "type": "MolInspectorNode",
+      "label": "MolInspectorNode",
+      "pos": [
+        1056,
+        527
+      ],
+      "inputs": [
+        216
+      ],
+      "outputs": [],
+      "params": {}
+    }
+  ],
+  "links": [
+    [
+      187,
+      180
+    ],
+    [
+      199,
+      189
+    ],
+    [
+      197,
+      191
+    ],
+    [
+      208,
+      201
+    ],
+    [
+      216,
+      203
+    ]
+  ]
+}
