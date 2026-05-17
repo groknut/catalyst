@@ -260,3 +260,4 @@ class MainWindow:
             )
 
             new_node.set_params(params)
+            self._style_node(new_node.id, cls.group)
