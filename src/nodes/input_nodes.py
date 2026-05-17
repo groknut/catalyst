@@ -7,9 +7,9 @@ from mol_data import MolData
 
 GROUP_NAME = "Input"
 
-
 class SMILESInputNode(BaseNode):
     group = GROUP_NAME
+    description = "Ввести SMILES строку молекулы"
 
     def build_node(self):
         self.out_mol = self.add_output_attribute("MolData", NodeTypes.MOL)
