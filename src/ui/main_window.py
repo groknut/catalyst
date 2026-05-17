@@ -100,30 +100,17 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Tab, callback=self._handle_tab)
             dpg.add_key_press_handler(dpg.mvKey_B, callback=self._handle_key_b)
 
-    def _handle_key_b(self):
+    def _handle_key_b(self, *args, **kwargs):
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
             self._toggle_library()
 
-    def _toggle_library(self):
+    def _toggle_library(self, *args, **kwargs):
         if dpg.is_item_shown("library_panel"):
             dpg.hide_item("library_panel")
         else:
             dpg.show_item("library_panel")
 
-    # def _style_node(self, node_id, group):
-    #     color = GROUP_COLORS.get(group, (80, 80, 100))
-    #     with dpg.theme() as node_theme:
-    #         with dpg.theme_component(dpg.mvNode):
-    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
-    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered,
-    #                                 tuple(min(c+30,255) for c in color),
-    #                                 category=dpg.mvThemeCat_Nodes)
-    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected,
-    #                                 tuple(min(c+50,255) for c in color),
-    #                                 category=dpg.mvThemeCat_Nodes)
-    #     dpg.bind_item_theme(node_id, node_theme)
-
-    def _handle_tab(self, sender, app_data):
+    def _handle_tab(self, *args, **kwargs):
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
             return
         cls = self.node_factory.get("StickyNoteNode")
@@ -131,7 +118,7 @@ class MainWindow:
             return
         self._add_node(cls)
 
-    def _handle_move_node(self, sender, app_data):
+    def _handle_move_node(self, sender, app_data, *args, **kwargs):
         ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
         shift = dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift)
 
@@ -154,7 +141,7 @@ class MainWindow:
             x, y = dpg.get_item_pos(node_id)
             dpg.set_item_pos(node_id, (x + dx, y + dy))
 
-    def _export_graph_image(self):
+    def _export_graph_image(self, *args, **kwargs):
         if self.pm.current_file:
             output_dir = Path(self.pm.current_file).parent / "output"
         else:
@@ -165,16 +152,16 @@ class MainWindow:
         print(f"Graph image saved to {path}")
 
 
-    def _handle_escape(self):
+    def _handle_escape(self, *args, **kwargs):
         self._save()
         dpg.stop_dearpygui()
 
-    def _handle_key_q(self):
+    def _handle_key_q(self, *args, **kwargs):
         """Ctrl+Q → выйти из редактора"""
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
             dpg.stop_dearpygui()
 
-    def _handle_key_s(self, sender, app_data):
+    def _handle_key_s(self, *args, **kwargs):
         """Ctrl+S → сохранить проект."""
         shift = dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift)
         ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
@@ -183,14 +170,14 @@ class MainWindow:
         else:
             self._save()
 
-    def _make_add_node_callback(self, node_class):
+    def _make_add_node_callback(self, node_class, *args, **kwargs):
         """Возвращает коллбэк, который точно добавляет конкретный узел."""
-        def callback(sender, app_data, user_data=None):
+        def callback(sender=None, app_data=None, user_data=None):
             self._add_node(node_class)
 
         return callback
 
-    def _add_node(self, node_class):
+    def _add_node(self, node_class, *args, **kwargs):
         if node_class is None:
             print("ERROR: Tried to add None node class!")
             return
@@ -198,7 +185,7 @@ class MainWindow:
         # self._style_node(node.id, node_class.group)   # ← красим заголовок
 
 
-    def _link_callback(self, sender, app_data):
+    def _link_callback(self, sender, app_data,  *args, **kwargs):
         out_pin, in_pin = app_data
         out_node = self.pm.node_manager.pin_to_node.get(out_pin)
         in_node = self.pm.node_manager.pin_to_node.get(in_pin)
@@ -214,7 +201,7 @@ class MainWindow:
         link_id = dpg.add_node_link(out_pin, in_pin, parent=sender)
         self.pm.node_manager.add_link(out_pin, in_pin, link_id=link_id)
 
-    def _delete_selected(self):
+    def _delete_selected(self, *args, **kwargs):
         for link_id in dpg.get_selected_links("main_editor"):
             self.pm.node_manager.remove_link_by_id(link_id)
         for node_id in dpg.get_selected_nodes("main_editor"):
@@ -222,15 +209,15 @@ class MainWindow:
             if dpg.does_item_exist(node_id):
                 dpg.delete_item(node_id)
 
-    def _save(self):
+    def _save(self, *args, **kwargs):
         self.pm.save_project()
 
-    def _save_as_callback(self, sender, app_data):
+    def _save_as_callback(self, sender, app_data, *args, **kwargs):
         path = app_data.get("file_path_name", "")
         if path:
             self.pm.save_project_as(path)
 
-    def _open_in_editor_callback(self, sender, app_data):
+    def _open_in_editor_callback(self, sender, app_data, *args, **kwargs):
         path = app_data.get("file_path_name", "")
         if not path:
             return
@@ -248,14 +235,22 @@ class MainWindow:
         self.pm.node_manager.out_to_ins.clear()
         self.pm.node_manager.link_id_to_in.clear()
 
+        self._clear_editor()
+
         self.pm.open_project(path, self.node_factory)
 
+    def _clear_editor(self, **kwargs):
+        if dpg.does_item_exist("main_editor"):
+            dpg.delete_item("main_editor", children_only=True)
+        self.pm.node_manager = NodeManager()
+        self.pm.current_file = None
 
-    def _handle_key_d(self, sender, app_data):
+
+    def _handle_key_d(self, sender, app_data, *args, **kwargs):
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
             self._duplicate_selected()
 
-    def _duplicate_selected(self):
+    def _duplicate_selected(self, *args, **kwargs):
         selected = dpg.get_selected_nodes("main_editor")
 
         for node_id in selected:
