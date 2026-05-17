@@ -32,6 +32,26 @@ class Application:
         self.main_window = None
         self.start_window = None
 
+
+
+    def _setup_icon(self):
+        if getattr(sys, 'frozen', False):
+            base = Path(sys.executable).parent
+        else:
+            base = Path(__file__).resolve().parent
+
+        icon_path = base / "assets" / "icon.ico"
+
+        if icon_path.exists():
+            try:
+                dpg.set_viewport_small_icon(str(icon_path))
+                dpg.set_viewport_large_icon(str(icon_path))
+                print(f"Иконка окна загружена: {icon_path}")
+            except Exception as e:
+                print(f"Не удалось загрузить иконку окна: {e}")
+        else:
+            print("Иконка окна не найдена (assets/icon.ico)")
+
     def _setup_font(self):
 
         if getattr(sys, "frozen", False):
@@ -55,6 +75,7 @@ class Application:
     def run(self):
         dpg.create_viewport(title="Catalyst", width=800, height=600, resizable=False)
         dpg.setup_dearpygui()
+        self._setup_icon()
 
         if self.open_file or self.init_dir:
             self.main_window = MainWindow(
