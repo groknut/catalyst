@@ -5,7 +5,7 @@ from core.base_node import BaseNode
 from core.node_types import NodeTypes
 from mol_data import MolData
 from rdkit.Chem import AllChem
-
+from rdkit.Chem.SaltRemover import SaltRemover
 GROUP_NAME = "RDkit"
 
 class MolToInChINode(BaseNode):
@@ -60,7 +60,7 @@ class SaltRemoverNode(BaseNode):
         data = self.manager.get_upstream_data(self.in_mol)
         if isinstance(data, MolData) and data.mol:
             try:
-                remover = Chem.SaltRemover()
+                remover = SaltRemover()
                 clean_mol = remover.StripMol(data.mol)
                 if clean_mol is not None:
                     self._cached_mol = MolData(clean_mol)
@@ -120,21 +120,17 @@ class SMILESCanonicalizerNode(BaseNode):
     description = "Преобразует произвольный SMILES в каноническую форму"
 
     def build_node(self):
-        self.in_smiles = self.add_input_attribute("SMILES", NodeTypes.SMILES)
+        self.in_mol = self.add_input_attribute("MolData", NodeTypes.MOL)
         self.out_canon = self.add_output_attribute("Canonical SMILES", NodeTypes.SMILES)
         with dpg.node_attribute(attribute_type=dpg.mvNode_Attr_Static):
             self.text = dpg.add_text("Canonical: --")
 
     def update(self):
-        smi = self.manager.get_upstream_data(self.in_smiles)
-        if smi:
-            mol = Chem.MolFromSmiles(str(smi))
-            if mol:
-                canon = Chem.MolToSmiles(mol)
-                dpg.set_value(self.text, f"Canonical: {canon}")
-                self.manager.propagate(self.out_canon)
-            else:
-                dpg.set_value(self.text, "Invalid SMILES")
+        data = self.manager.get_upstream_data(self.in_mol)
+        if isinstance(data, MolData) and data.mol:
+            canon = Chem.MolToSmiles(data.mol)
+            dpg.set_value(self.text, f"Canonical: {canon}")
+            self.manager.propagate(self.out_canon)
         else:
             dpg.set_value(self.text, "Canonical: --")
 
