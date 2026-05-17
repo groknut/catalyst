@@ -20,13 +20,9 @@ class Application:
         self.pm = ProjectManager(self.logger)
 
         if getattr(sys, "frozen", False):
-            base_path = Path(
-                __file__
-            ).parent
+            base_path = Path(__file__).parent
         else:
-            base_path = Path(
-                __file__
-            ).parent
+            base_path = Path(__file__).parent
 
         self.node_factory, self.groups = load_all_nodes(
             self.config, nodes_folder=base_path / "nodes"
@@ -50,10 +46,10 @@ class Application:
                 with dpg.font(str(font_path), size=18) as font:
                     dpg.add_font_range_hint(dpg.mvFontRangeHint_Cyrillic)
                 dpg.bind_font(font)
-            self.logger.debug(f"✅ Загружен встроенный шрифт: {font_path}")
+            self.logger.debug(f"Загружен встроенный шрифт: {font_path}")
         else:
             self.logger.debug(
-                "ℹ Встроенный шрифт не найден (assets/font.ttf). Кириллица может не отображаться."
+                "Встроенный шрифт не найден (assets/font.ttf). Кириллица может не отображаться."
             )
 
     def run(self):
@@ -73,6 +69,7 @@ class Application:
                     print(f"❌ Файл проекта не найден: {self.open_file}")
             elif self.init_dir:
                 self.pm.new_project(self.init_dir)
+            dpg.maximize_viewport()
         else:
             # Обычный запуск: показываем лаунчер
             self.start_window = StartWindow(app_callback=self.on_start_action)
@@ -105,10 +102,33 @@ if __name__ == "__main__":
     parser.add_argument("-c", "--config", help="Path to YAML config file")
     parser.add_argument("-o", "--open", help="Open project from .catalyst file")
     parser.add_argument("--init", help="Create new project in the specified folder")
+    parser.add_argument(
+        "-l",
+        "--list-nodes",
+        action="store_true",
+        help="Print available node types and exit",
+    )
     args = parser.parse_args()
 
+    if args.list_nodes:
+        config = Config(args.config)
+        if getattr(sys, "frozen", False):
+            base_path = Path(__file__).parent
+        else:
+            base_path = Path(__file__).parent
+        factory, groups = load_all_nodes(config, nodes_folder=base_path / "nodes")
+        print("=== Available Nodes ===\n")
+        for grp, names in groups.items():
+            print(f"--- {grp} ---")
+            for name in sorted(names):
+                print(f"  • {name}")
+            print()
+        sys.exit(0)
+
     if args.open and args.init:
-        print("Warning: both --open and --init specified, opening file, ignoring --init.")
+        print(
+            "Warning: both --open and --init specified, opening file, ignoring --init."
+        )
         init_dir = None
     else:
         init_dir = args.init

@@ -33,7 +33,6 @@ def scan_directory(directory: Path, factory):
         if py_file.name.startswith("_"):
             continue
         module_name = py_file.stem
-        print(module_name)
         try:
             mod = importlib.import_module(module_name)
             for attr in dir(mod):
