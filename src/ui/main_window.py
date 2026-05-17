@@ -52,7 +52,7 @@ class MainWindow:
 
 
             with dpg.group(horizontal=True):
-                with dpg.child_window(width=220, border=True):
+                with dpg.child_window(tag="library_panel", width=220, border=True):
                     dpg.add_spacer(height=15)
                     dpg.add_text("Node Library", color=(100, 200, 255))
                     dpg.add_separator()
@@ -99,6 +99,17 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Up, callback=self._handle_move_node)
             dpg.add_key_press_handler(dpg.mvKey_Down, callback=self._handle_move_node)
             dpg.add_key_press_handler(dpg.mvKey_Tab, callback=self._handle_tab)
+            dpg.add_key_press_handler(dpg.mvKey_B, callback=self._handle_key_b)
+
+    def _handle_key_b(self):
+        if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
+            self._toggle_library()
+
+    def _toggle_library(self):
+        if dpg.is_item_shown("library_panel"):
+            dpg.hide_item("library_panel")
+        else:
+            dpg.show_item("library_panel")
 
     def _style_node(self, node_id, group):
         color = GROUP_COLORS.get(group, (80, 80, 100))
