@@ -10,7 +10,7 @@ class StickyNoteNode(BaseNode):
             dpg.add_text("Note text:")
             self.text_input = dpg.add_input_text(
                 label="", default_value="Введите заметку...",
-                multiline=True, width=250, height=120,
+                multiline=True, width=150, height=80,
                 no_horizontal_scroll=True,
                 tag=f"note_text_{self.id}",
                 callback=lambda s,a,u: self._on_text_changed()
