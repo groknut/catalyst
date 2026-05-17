@@ -232,8 +232,24 @@ class MainWindow:
 
     def _open_in_editor_callback(self, sender, app_data):
         path = app_data.get("file_path_name", "")
-        if path:
-            self.pm.open_project(path, self.node_factory)
+        if not path:
+            return
+
+        for link_id in list(self.pm.node_manager.link_id_to_in.keys()):
+                self.pm.node_manager.remove_link_by_id(link_id)
+        for node_id in list(self.pm.node_manager.nodes.keys()):
+            self.pm.node_manager.unregister_node(node_id)
+            if dpg.does_item_exist(node_id):
+                dpg.delete_item(node_id)
+        # Сбрасываем состояние менеджера
+        self.pm.node_manager.links.clear()
+        self.pm.node_manager.nodes.clear()
+        self.pm.node_manager.pin_to_node.clear()
+        self.pm.node_manager.out_to_ins.clear()
+        self.pm.node_manager.link_id_to_in.clear()
+
+        self.pm.open_project(path, self.node_factory)
+
 
     def _handle_key_d(self, sender, app_data):
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
