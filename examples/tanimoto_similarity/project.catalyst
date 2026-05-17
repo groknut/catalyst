@@ -1,0 +1,83 @@
+{
+  "nodes": [
+    {
+      "id": 176,
+      "type": "SMILESInputNode",
+      "label": "SMILESInputNode",
+      "pos": [
+        104,
+        143
+      ],
+      "inputs": [],
+      "outputs": [
+        177,
+        179
+      ],
+      "params": {
+        "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O"
+      }
+    },
+    {
+      "id": 183,
+      "type": "SMILESInputNode",
+      "label": "SMILESInputNode",
+      "pos": [
+        103,
+        353
+      ],
+      "inputs": [],
+      "outputs": [
+        184,
+        186
+      ],
+      "params": {
+        "smiles": "CC(C)CC1=CC=C(C=C1)C(C)C(=O)O"
+      }
+    },
+    {
+      "id": 190,
+      "type": "PrintNode",
+      "label": "PrintNode",
+      "pos": [
+        740,
+        259
+      ],
+      "inputs": [
+        191
+      ],
+      "outputs": [],
+      "params": {}
+    },
+    {
+      "id": 196,
+      "type": "TanimotoSimilarityNode",
+      "label": "TanimotoSimilarityNode",
+      "pos": [
+        456,
+        223
+      ],
+      "inputs": [
+        197,
+        199
+      ],
+      "outputs": [
+        201
+      ],
+      "params": {}
+    }
+  ],
+  "links": [
+    [
+      197,
+      177
+    ],
+    [
+      199,
+      184
+    ],
+    [
+      191,
+      201
+    ]
+  ]
+}
