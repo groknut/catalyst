@@ -88,6 +88,7 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_S, callback=self._handle_key_s)
             dpg.add_key_press_handler(dpg.mvKey_Q, callback=self._handle_key_q)
             dpg.add_key_press_handler(dpg.mvKey_Escape, callback=self._handle_escape)
+            dpg.add_key_press_handler(dpg.mvKey_D, callback=self._handle_key_d)
 
     def _handle_escape(self):
         self._save()
@@ -158,3 +159,28 @@ class MainWindow:
         path = app_data.get("file_path_name", "")
         if path:
             self.pm.open_project(path, self.node_factory)
+
+    def _handle_key_d(self, sender, app_data):
+        if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
+            self._duplicate_selected()
+
+    def _duplicate_selected(self):
+        selected = dpg.get_selected_nodes("main_editor")
+
+        for node_id in selected:
+            node = self.pm.node_manager.nodes.get(node_id)
+            if not node:
+                continue
+
+            params = node.get_params()
+            pos = dpg.get_item_pos(node_id)
+            cls = type(node)
+
+            new_node = cls(
+                self.pm.node_manager,
+                dpg.get_item_label(node_id),
+                parent="main_editor",
+                pos=(pos[0] + 200, pos[1])
+            )
+
+            new_node.set_params(params)
