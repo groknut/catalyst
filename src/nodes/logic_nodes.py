@@ -48,7 +48,6 @@ class IfNode(BaseNode):
                 return mol_data
             if pin_id == self.out_false and flag is False:
                 return mol_data
-        # В остальных случаях возвращаем None или пустую молекулу
         return MolData(None)
 
     def get_params(self):
@@ -56,3 +55,67 @@ class IfNode(BaseNode):
 
     def set_params(self, p):
         pass
+
+
+class BoolAndNode(BaseNode):
+    group = "Logic"
+    description = "Логическое И (AND) для двух флагов"
+
+    def build_node(self):
+        self.in_a = self.add_input_attribute("A", NodeTypes.BOOL)
+        self.in_b = self.add_input_attribute("B", NodeTypes.BOOL)
+        self.out_result = self.add_output_attribute("A AND B", NodeTypes.BOOL)
+        with dpg.node_attribute(attribute_type=dpg.mvNode_Attr_Static):
+            self.text = dpg.add_text("AND: --")
+
+    def update(self):
+        a = self.manager.get_upstream_data(self.in_a)
+        b = self.manager.get_upstream_data(self.in_b)
+        if a is not None and b is not None:
+            res = bool(a) and bool(b)
+            dpg.set_value(self.text, f"AND: {res}")
+            self.manager.propagate(self.out_result)
+        else:
+            dpg.set_value(self.text, "AND: --")
+
+    def get_output_value(self, pin_id):
+        a = self.manager.get_upstream_data(self.in_a)
+        b = self.manager.get_upstream_data(self.in_b)
+        if a is not None and b is not None:
+            return bool(a) and bool(b)
+        return None
+
+    def get_params(self): return {}
+    def set_params(self, p): pass
+
+
+class BoolOrNode(BaseNode):
+    group = "Logic"
+    description = "Логическое ИЛИ (OR) для двух флагов"
+
+    def build_node(self):
+        self.in_a = self.add_input_attribute("A", NodeTypes.BOOL)
+        self.in_b = self.add_input_attribute("B", NodeTypes.BOOL)
+        self.out_result = self.add_output_attribute("A OR B", NodeTypes.BOOL)
+        with dpg.node_attribute(attribute_type=dpg.mvNode_Attr_Static):
+            self.text = dpg.add_text("OR: --")
+
+    def update(self):
+        a = self.manager.get_upstream_data(self.in_a)
+        b = self.manager.get_upstream_data(self.in_b)
+        if a is not None and b is not None:
+            res = bool(a) or bool(b)
+            dpg.set_value(self.text, f"OR: {res}")
+            self.manager.propagate(self.out_result)
+        else:
+            dpg.set_value(self.text, "OR: --")
+
+    def get_output_value(self, pin_id):
+        a = self.manager.get_upstream_data(self.in_a)
+        b = self.manager.get_upstream_data(self.in_b)
+        if a is not None and b is not None:
+            return bool(a) or bool(b)
+        return None
+
+    def get_params(self): return {}
+    def set_params(self, p): pass
