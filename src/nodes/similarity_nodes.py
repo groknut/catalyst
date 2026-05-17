@@ -1,5 +1,8 @@
 from rdkit.Chem import AllChem, DataStructs
 from core.base_node import BaseNode
+from core.node_types import NodeTypes
+import dearpygui.dearpygui as dpg
+from mol_data import MolData
 
 GROUP_NAME = "Similarity"
 class TanimotoSimilarityNode(BaseNode):
