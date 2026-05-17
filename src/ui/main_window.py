@@ -1,6 +1,7 @@
 import dearpygui.dearpygui as dpg
 from core.node_types import TYPE_COLORS, NodeTypes
 from pathlib import Path
+from .constants import GROUP_COLORS
 
 class MainWindow:
     def __init__(
@@ -13,22 +14,7 @@ class MainWindow:
         self.pm = project_manager
         self.node_factory = node_factory
         self.groups = groups
-        self.GROUP_COLORS = {
-            "Data I/O":       (70, 130, 180),
-            "RDKit":          (50, 180, 100),
-            "Properties":     (120, 160, 255),
-            "Filters":        (255, 170, 50),
-            "Logic":          (190, 130, 255),
-            "Flow":           (180, 180, 60),
-            "Input":          (80, 220, 200),
-            "Output":         (255, 130, 130),
-            "Math":           (150, 150, 150),
-            "Similarity":     (200, 160, 100),
-            "Cheminformatics":(100, 200, 150),
-            "Notes":          (180, 180, 180),
-            "Constants":      (160, 160, 160),
-            "Text":           (140, 140, 200),
-        }
+
         self._setup_ui()
 
     def _setup_ui(self):
@@ -112,10 +98,10 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Right, callback=self._handle_move_node)
             dpg.add_key_press_handler(dpg.mvKey_Up, callback=self._handle_move_node)
             dpg.add_key_press_handler(dpg.mvKey_Down, callback=self._handle_move_node)
-
+            dpg.add_key_press_handler(dpg.mvKey_Tab, callback=self._handle_tab)
 
     def _style_node(self, node_id, group):
-        color = self.GROUP_COLORS.get(group, (80, 80, 100))
+        color = GROUP_COLORS.get(group, (80, 80, 100))
         with dpg.theme() as node_theme:
             with dpg.theme_component(dpg.mvNode):
                 dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
@@ -126,6 +112,14 @@ class MainWindow:
                                     tuple(min(c+50,255) for c in color),
                                     category=dpg.mvThemeCat_Nodes)
         dpg.bind_item_theme(node_id, node_theme)
+
+    def _handle_tab(self, sender, app_data):
+        if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
+            return
+        cls = self.node_factory.get("StickyNoteNode")
+        if cls is None:
+            return
+        self._add_node(cls)
 
     def _handle_move_node(self, sender, app_data):
         ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
