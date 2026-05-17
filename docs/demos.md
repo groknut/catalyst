@@ -5,7 +5,7 @@ author: Groknut
 date: 2026-05-17
 ---
 
-Все примеры расположены в [репозитории](../examples/).
+Все примеры расположены в [репозитории](https://github.com/groknut/catalyst/tree/main/examples).
 
 
 ### Проверка правила Липински (Rule of 5)
