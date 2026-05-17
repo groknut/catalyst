@@ -1,7 +1,6 @@
 import dearpygui.dearpygui as dpg
 from core.node_types import TYPE_COLORS, NodeTypes
 from pathlib import Path
-from .constants import GROUP_COLORS
 
 class MainWindow:
     def __init__(
@@ -111,18 +110,18 @@ class MainWindow:
         else:
             dpg.show_item("library_panel")
 
-    def _style_node(self, node_id, group):
-        color = GROUP_COLORS.get(group, (80, 80, 100))
-        with dpg.theme() as node_theme:
-            with dpg.theme_component(dpg.mvNode):
-                dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
-                dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered,
-                                    tuple(min(c+30,255) for c in color),
-                                    category=dpg.mvThemeCat_Nodes)
-                dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected,
-                                    tuple(min(c+50,255) for c in color),
-                                    category=dpg.mvThemeCat_Nodes)
-        dpg.bind_item_theme(node_id, node_theme)
+    # def _style_node(self, node_id, group):
+    #     color = GROUP_COLORS.get(group, (80, 80, 100))
+    #     with dpg.theme() as node_theme:
+    #         with dpg.theme_component(dpg.mvNode):
+    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
+    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered,
+    #                                 tuple(min(c+30,255) for c in color),
+    #                                 category=dpg.mvThemeCat_Nodes)
+    #             dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected,
+    #                                 tuple(min(c+50,255) for c in color),
+    #                                 category=dpg.mvThemeCat_Nodes)
+    #     dpg.bind_item_theme(node_id, node_theme)
 
     def _handle_tab(self, sender, app_data):
         if dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl):
@@ -196,7 +195,7 @@ class MainWindow:
             print("ERROR: Tried to add None node class!")
             return
         node = node_class(self.pm.node_manager, node_class.__name__, parent="main_editor")
-        self._style_node(node.id, node_class.group)   # ← красим заголовок
+        # self._style_node(node.id, node_class.group)   # ← красим заголовок
 
 
     def _link_callback(self, sender, app_data):
@@ -260,4 +259,4 @@ class MainWindow:
             )
 
             new_node.set_params(params)
-            self._style_node(new_node.id, cls.group)
+            # self._style_node(new_node.id, cls.group)
