@@ -1,0 +1,230 @@
+<!doctype html>
+<html data-bs-theme="">
+
+<head>
+    <title>Demos - Catalyst
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://groknut.github.io/catalyst/demos/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icon.ico">
+    
+    
+    
+    <meta name="title" content="Демонстрационные решения на Catalyst">
+    <meta property="og:title" content="Демонстрационные решения на Catalyst">
+    <meta name="twitter:title" content="Демонстрационные решения на Catalyst">
+    
+    
+    <meta name="description" content="примеры задач, которые уже можно решать в нашем редакторе">
+    <meta property="og:description" content="примеры задач, которые уже можно решать в нашем редакторе">
+    <meta name="twitter:description" content="примеры задач, которые уже можно решать в нашем редакторе">
+    
+    
+    <meta name="author" content="Groknut">
+    
+    
+    <meta name="date" content="2026-05-17">
+    <meta property="article:published_time" content="2026-05-17">
+    
+    
+    
+    <meta property="og:url" content="https://groknut.github.io/catalyst/demos/">
+    
+    
+    <meta property="og:site_name" content="Catalyst">
+    
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+    <script src="../search/main.js"></script>
+
+    
+    
+    
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+            <img class="logo" src="../assets/icon.svg">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Catalyst</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Catalyst]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../get_started/">[Get started]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../nodes/">[Nodes]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" active 
+                            nav-link text-gray text-decoration-none" href="./">[Demos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main><!-- block search -->
+<div class="collapse" id="collapseExample">
+    <div role="search" class="search-box">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <input type="text" name="q" class="search-query"
+            placeholder="Search docs" title="Type search term here" />
+        </form>
+    </div>
+</div>
+<!-- endblock -->
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Demos</h1>
+            
+        </header>
+        <p><p>Все примеры расположены в <a href="https://github.com/groknut/catalyst/tree/main/examples">репозитории</a>.</p>
+<h3 id="rule-of-5">Проверка правила Липински (Rule of 5)</h3>
+<p><strong>Задача:</strong> определить, проходит ли молекула по правилам лекарственного подобия, и сохранить изображение, если проходит.</p>
+<p><strong>Узлы:</strong> <em>SMILESInputNode</em> → <em>RuleOfFiveFilterNode</em> → <em>IfNode</em> → (<code>True</code>) <em>MolImageSaveNode</em>, (<code>False</code>) <em>PrintNode</em></p>
+<p><strong>Пошагово:</strong>
+1. Добавьте <em>SMILESInputNode</em>, введите <code>CC(=O)OC1=CC=CC=C1C(=O)O</code> (аспирин).
+2. Добавьте <em>RuleOfFiveFilterNode</em> и соедините выход <code>MolData</code> с его входом.
+3. Добавьте <em>IfNode</em>. Соедините <code>Pass</code> фильтра с входом <code>Pass</code> шлюза, а <code>MolOut</code> фильтра — с входом <code>MolData</code> шлюза.
+4. К выходу <code>True</code> шлюза подключите <em>MolImageSaveNode</em> (имя файла <code>passed.png</code>).
+5. К выходу <code>False</code> шлюза подключите <em>PrintNode</em>.</p>
+<p><strong>Результат:</strong> для аспирина изображение сохранится в <code>output/passed.png</code>. Если ввести заведомо неподходящую молекулу (например, таксол), <em>PrintNode</em> покажет «Closed».</p>
+<p><img alt="Итоговый результат" src="../assets/examples/lipinski.png" /></p>
+<h3 id="_1">Сравнение двух молекул по Танимото</h3>
+<p><strong>Задача:</strong> оценить структурное сходство аспирина и ибупрофена.</p>
+<p><strong>Узлы:</strong> два <em>SMILESInputNode</em> → <em>TanimotoSimilarityNode</em> → <em>PrintNode</em></p>
+<p><strong>Пошагово:</strong>
+1. Добавьте два <em>SMILESInputNode</em>. В первый введите <code>CC(=O)OC1=CC=CC=C1C(=O)O</code> (аспирин), во второй — <code>CC(C)CC1=CC=C(C=C1)C(C)C(=O)O</code> (ибупрофен).
+2. Добавьте <em>TanimotoSimilarityNode</em>. Подключите выходы <code>MolData</code> обоих источников к входам <code>MolData A</code> и <code>MolData B</code>.
+3. К выходу <em>Tanimoto</em> подключите <em>PrintNode</em>.</p>
+<p><strong>Результат:</strong> <em>PrintNode</em> покажет <code>Tanimoto: 0.19</code>. Молекулы умеренно схожи.</p>
+<p><img alt="Итоговый результат" src="../assets/examples/tanimoto.png" /></p></p>
+    </article>
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../nodes/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+    <script src="../search/main.js" defer></script>
+
+</body>
+
+</html>

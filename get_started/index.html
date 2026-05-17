@@ -1,0 +1,332 @@
+<!doctype html>
+<html data-bs-theme="">
+
+<head>
+    <title>Get started - Catalyst
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://groknut.github.io/catalyst/get_started/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+    <script src="../search/main.js"></script>
+
+    
+    
+    
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+            <img class="logo" src="../assets/icon.svg">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Catalyst</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Catalyst]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" active 
+                            nav-link text-gray text-decoration-none" href="./">[Get started]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../nodes/">[Nodes]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../demos/">[Demos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main><!-- block search -->
+<div class="collapse" id="collapseExample">
+    <div role="search" class="search-box">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <input type="text" name="q" class="search-query"
+            placeholder="Search docs" title="Type search term here" />
+        </form>
+    </div>
+</div>
+<!-- endblock -->
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Get started</h1>
+            
+        </header>
+        <p><h2 id="_1">Установка</h2>
+<h3 id="_2">Сборка из исходников</h3>
+<ol>
+<li>Склонируйте репозиторий:</li>
+</ol>
+<pre><code class="language-bash">git clone https://github.com/groknut/catalyst.git
+cd catalyst
+</code></pre>
+<ol>
+<li>Установите зависимости с помощью <code>uv</code>:</li>
+</ol>
+<pre><code class="language-bash">uv sync
+</code></pre>
+<ol>
+<li>Запустите приложение:</li>
+</ol>
+<pre><code class="language-bash">uv run src/app.py
+</code></pre>
+<h3 id="_3">Готовые сборки</h3>
+<p>~Сейчас находятся в активной разработке~</p>
+<h2 id="_4">Конфигурация</h2>
+<p>YAML‑конфиг автоматически создаётся в <code>~/.catalyst/config.yaml</code>:</p>
+<pre><code class="language-yaml">custom_nodes_dir: ~\.catalyst\custom_nodes
+log_file: ~\.catalyst\catalyst.log
+log_level: INFO
+</code></pre>
+<h2 id="_5">Управление</h2>
+<h3 id="cli-">CLI-приложение (без лаунчера)</h3>
+<table>
+<thead>
+<tr>
+<th>Аргумент</th>
+<th>Сокращение</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--help</code></td>
+<td><code>-h</code></td>
+<td>Показать справку и выйти</td>
+</tr>
+<tr>
+<td><code>--config</code></td>
+<td><code>-c</code></td>
+<td>Путь к YAML‑файлу конфигурации (по умолчанию <code>~/.catalyst/config.yaml</code>)</td>
+</tr>
+<tr>
+<td><code>--open</code></td>
+<td><code>-o</code></td>
+<td>Открыть проект из файла <code>.catalyst</code> и сразу перейти в редактор</td>
+</tr>
+<tr>
+<td><code>--init</code></td>
+<td>-</td>
+<td>Создать новый проект в указанной папке и сразу перейти в редактор</td>
+</tr>
+<tr>
+<td><code>--list-nodes</code></td>
+<td><code>-l</code></td>
+<td>Вывести список всех доступных узлов и выйти</td>
+</tr>
+</tbody>
+</table>
+<h3 id="gui-">GUI-приложение</h3>
+<table>
+<thead>
+<tr>
+<th>Комбинация</th>
+<th>Где работает</th>
+<th>Действие</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ctrl+S</strong></td>
+<td>Редактор</td>
+<td>Сохранить проект</td>
+</tr>
+<tr>
+<td><strong>Ctrl+Q</strong></td>
+<td>Редактор</td>
+<td>Выйти из редактора (закрыть программу)</td>
+</tr>
+<tr>
+<td><strong>Delete</strong></td>
+<td>Редактор</td>
+<td>Удалить выделенные узлы и связи</td>
+</tr>
+<tr>
+<td><strong>Esc</strong></td>
+<td>Редактор</td>
+<td>Выйти из проекта, сохранив проект</td>
+</tr>
+<tr>
+<td><strong>Ctrl+D</strong></td>
+<td>Редактор</td>
+<td>Дублировать выделенные узлы</td>
+</tr>
+<tr>
+<td><strong>Ctrl+Shift+S</strong></td>
+<td>Редактор</td>
+<td>Экспортировать граф в PNG</td>
+</tr>
+<tr>
+<td><strong>Tab</strong></td>
+<td>Редактор</td>
+<td>Быстро создать заметку (StickyNote)</td>
+</tr>
+<tr>
+<td><strong>Ctrl+Shift+← ↑ → ↓</strong></td>
+<td>Редактор</td>
+<td>Переместить выделенные узлы на 20px</td>
+</tr>
+<tr>
+<td><strong>Ctrl+B</strong></td>
+<td>Редактор</td>
+<td>Скрыть библиотеку узлов</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_6">Первый проект</h2>
+<h3 id="_7">Запустите приложение и выберите создать новый проект:</h3>
+<p><img alt="Лаунчер" src="../assets/screenshots/launcher.png" /></p>
+<h3 id="_8">Выберите директорию, в которой будет храниться данные вашего проекта:</h3>
+<p><img alt="Лаунчер" src="../assets/screenshots/select_dir.png" /></p>
+<h3 id="_9">После выбора директории проекта внутри создается следующая структура:</h3>
+<pre><code class="language-plaintext">📁 проект/
+├── 📁 input/            # Исходные данные (SDF, SMILES, CSV…)
+├── 📁 output/           # Результаты (PNG, CSV, SDF, отчёты)
+├── 📄 README.md         # Описание проекта (по желанию)
+└── 📄 project.catalyst  # Граф узлов и связей (JSON)
+</code></pre>
+<p>И открывается редактор:
+<img alt="Редактор" src="../assets/screenshots/node_editor.png" /></p>
+<h3 id="_10">Теперь мы можем начать строить химический пайплайн. Для начала мы выведем молекулярный вес и сохраним изображение октанитрокубана.</h3>
+<p>Его каноническая запись SMILES выглядит следующим образом:</p>
+<pre><code class="language-txt">C12(C3(C4(C1(C5(C2(C3(C45[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]
+</code></pre>
+<p>Выбираем узлы:</p>
+<ul>
+<li><em>SMILESInputNode</em> - позволяет вводить SMILES запись и переводить ее в <code>Mol</code> объект (для <code>rdkit</code>)</li>
+<li><em>MolWeight</em> - вычисляет молекулярный вес молекулы и переводит его в <code>FLOAT</code></li>
+<li><em>MolImageSaveNode</em> - позволяет сохранить изображение молекулы</li>
+</ul>
+<p>Получается следующий результат:
+<img alt="Результат" src="../assets/screenshots/result.png" /></p></p>
+    </article>
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href=".." class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../nodes/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+    <script src="../search/main.js" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,413 @@
+<!doctype html>
+<html data-bs-theme="">
+
+<head>
+    <title>Nodes - Catalyst
+    </title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+    
+    <link rel="canonical" href="https://groknut.github.io/catalyst/nodes/">
+    
+
+    
+    <link rel="icon" type="image/x-icon" href="../assets/icon.ico">
+    
+    
+
+    <script>var base_url = '..';</script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/root.min.css">
+    <link rel="stylesheet" href="../assets/css/main.min.css">
+    <link rel="stylesheet" href="../assets/css/media.min.css">
+    <link rel="stylesheet" href="../assets/css/mkdocstrings.min.css">
+    <script src="../search/main.js"></script>
+
+    
+    
+    
+    
+</head>
+
+<body>
+    <div class="container py-3">
+        <header>
+            <!-- block header -->
+<nav class="navbar navbar-expand-xl border-bottom">
+    <div class="container-fluid">
+        
+            <img class="logo" src="../assets/icon.svg">
+        
+
+        
+            <span class=" fs-4 title-color site-name" id="component-site-name" style="text-transform: uppercase;">Catalyst</span>
+        
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsMenu"
+            aria-controls="navbarsMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse flex-column ml-auto" id="navbarsMenu">
+            <ul class="navbar-nav">
+
+                <!-- block menu -->
+                <li class="nav-item">
+                    <!-- block menu -->
+    
+        <li class="nav-item" id="component-menu">
+            <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="..">[Catalyst]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../get_started/">[Get started]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class=" active 
+                            nav-link text-gray text-decoration-none" href="./">[Nodes]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="
+                            nav-link text-gray text-decoration-none" href="../demos/">[Demos]</a>
+                        </li>
+            </ul>
+        </li>
+<!-- endblock -->
+                </li>
+                <!-- endblock -->
+
+                <!-- block search -->
+                <li class="nav-item">
+                    <a class="collapsed" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="md-search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </li>
+                <!--  endblock -->
+
+                <!-- block source -->
+                <li class="nav-item">
+                    
+                </li>
+                <!--  endblock -->
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--  endblock -->
+        </header>
+
+        <main><!-- block search -->
+<div class="collapse" id="collapseExample">
+    <div role="search" class="search-box">
+        <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+            <input type="text" name="q" class="search-query"
+            placeholder="Search docs" title="Type search term here" />
+        </form>
+    </div>
+</div>
+<!-- endblock -->
+
+            
+            <!-- block content -->
+<section class="container post" id="component-content">
+    <article>
+        <header>
+            
+                <h1 class=" title" id="component-title">Nodes</h1>
+            
+        </header>
+        <p><p>Узлы делятся на группы, чтобы с ними было легче всего взаимодействовать:</p>
+<ul>
+<li><code>INPUT</code> — принимает все из ввода или из <code>input</code> директории.</li>
+<li><code>OUTPUT</code> — сохраняет и экспортирует результаты в <code>output</code> директорию.</li>
+<li><code>PROPERTIES</code> — выводит значения отдельного параметра для молекулы.</li>
+<li><code>FILTERS</code> — фильтрует поступающие объекты по признаку.</li>
+<li><code>RDKIT</code> — преобразования и анализ структур через RDKit.</li>
+<li><code>SIMILARITY</code> — оценивает сходство между молекулами.</li>
+<li><code>NOTES</code> — визуальные элементы для организации графа.</li>
+<li><code>LOGIC</code> — управление потоком данных.</li>
+<li><code>MATH</code> — математические операции с числами.</li>
+</ul>
+<h2 id="input">INPUT узлы</h2>
+<h3 id="smilesinputnode">SMILESInputNode</h3>
+<p><strong>Принимает:</strong> –<br />
+<strong>Выдаёт:</strong> MolData (RDKit_Mol), SMILES (String)<br />
+<strong>Параметры:</strong> поле ввода SMILES<br />
+<strong>Описание:</strong> вводите SMILES и получаете молекулу.</p>
+<h3 id="sdfindexinputnode">SDFIndexInputNode</h3>
+<p><strong>Принимает:</strong> –<br />
+<strong>Выдаёт:</strong> MolData (RDKit_Mol), Count (Integer)<br />
+<strong>Параметры:</strong> имя файла (.sdf) в папке <code>input/</code>, кнопки ◀ ▶ для перебора<br />
+<strong>Описание:</strong> листает молекулы из SDF-файла и передаёт текущую дальше.</p>
+<h2 id="output">OUTPUT узлы</h2>
+<h3 id="molimagesavenode">MolImageSaveNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> –<br />
+<strong>Параметры:</strong> Filename, Width, Height<br />
+<strong>Описание:</strong> сохраняет изображение молекулы в <code>output/</code>.</p>
+<h3 id="moltosdfnode">MolToSDFNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> –<br />
+<strong>Параметры:</strong> имя файла (.sdf) в папке <code>output/</code><br />
+<strong>Описание:</strong> сохраняет молекулу в SDF-файл.</p>
+<h3 id="csvloggernode">CSVLoggerNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> –<br />
+<strong>Параметры:</strong> имя файла (.csv) в папке <code>output/</code>, флаг Dedup<br />
+<strong>Описание:</strong> при каждом обновлении дописывает свойства молекулы в CSV. Не дублирует строки, если включён Dedup.</p>
+<h3 id="printnode">PrintNode</h3>
+<p><strong>Принимает:</strong> Any<br />
+<strong>Выдаёт:</strong> –<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> показывает полученные данные внутри узла.</p>
+<h2 id="properties">PROPERTIES узлы</h2>
+<p>Все свойства принимают MolData (RDKit_Mol) и выдают соответствующее значение. Параметров нет.</p>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Выходной пин</th>
+<th>Тип</th>
+<th>Описание</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MolWeightNode</td>
+<td>MolWeight</td>
+<td>Float</td>
+<td>молекулярная масса</td>
+</tr>
+<tr>
+<td>MolLogPNode</td>
+<td>LogP</td>
+<td>Float</td>
+<td>коэффициент распределения LogP</td>
+</tr>
+<tr>
+<td>TPSANode</td>
+<td>TPSA</td>
+<td>Float</td>
+<td>топологическая полярная площадь</td>
+</tr>
+<tr>
+<td>HBANode</td>
+<td>HBA</td>
+<td>Integer</td>
+<td>число акцепторов водорода</td>
+</tr>
+<tr>
+<td>HBDNode</td>
+<td>HBD</td>
+<td>Integer</td>
+<td>число доноров водорода</td>
+</tr>
+<tr>
+<td>HeavyAtomCountNode</td>
+<td>HeavyAtoms</td>
+<td>Integer</td>
+<td>количество тяжёлых атомов</td>
+</tr>
+<tr>
+<td>NumAtomsNode</td>
+<td>NumAtoms</td>
+<td>Integer</td>
+<td>общее количество атомов</td>
+</tr>
+<tr>
+<td>AromaticRingCountNode</td>
+<td>AromRings</td>
+<td>Integer</td>
+<td>количество ароматических колец</td>
+</tr>
+<tr>
+<td>RingCountNode</td>
+<td>Rings</td>
+<td>Integer</td>
+<td>общее количество колец</td>
+</tr>
+<tr>
+<td>RotatableBondsNode</td>
+<td>RotBonds</td>
+<td>Integer</td>
+<td>число вращающихся связей</td>
+</tr>
+<tr>
+<td>MolecularFormulaNode</td>
+<td>Formula</td>
+<td>String</td>
+<td>молекулярная формула</td>
+</tr>
+<tr>
+<td>QEDNode</td>
+<td>QED</td>
+<td>Float</td>
+<td>оценка лекарственного подобия</td>
+</tr>
+<tr>
+<td>MolInspectorNode</td>
+<td>– (отображает внутри)</td>
+<td></td>
+<td>сводка всех основных свойств</td>
+</tr>
+</tbody>
+</table>
+<h2 id="filter">FILTER узлы</h2>
+<p>Все фильтры принимают MolData (RDKit_Mol) и выдают <code>Pass</code> (Bool) и <code>MolOut</code> (RDKit_Mol). В статической панели задаются минимальное/максимальное значение.</p>
+<table>
+<thead>
+<tr>
+<th>Узел</th>
+<th>Фильтруемый параметр</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MolWeightFilterNode</td>
+<td>молекулярная масса</td>
+</tr>
+<tr>
+<td>LogPFilterNode</td>
+<td>LogP</td>
+</tr>
+<tr>
+<td>HeavyAtomFilterNode</td>
+<td>количество тяжёлых атомов</td>
+</tr>
+<tr>
+<td>RotBondsFilterNode</td>
+<td>число вращающихся связей</td>
+</tr>
+<tr>
+<td>RuleOfFiveFilterNode</td>
+<td>комплексное правило Липински (MW, LogP, HBD, HBA)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="rdkit">RDKIT узлы</h2>
+<h3 id="saltremovernode">SaltRemoverNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> MolData (RDKit_Mol)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> удаляет соли, оставляя самый крупный органический фрагмент.</p>
+<h3 id="molto3dnode">MolTo3DNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> MolData 3D (RDKit_Mol)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> генерирует 3D-координаты (ETKDG) и выдаёт молекулу с конформером.</p>
+<h3 id="moltoinchinode">MolToInChINode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> InChI (String)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> конвертирует молекулу в стандартный InChI.</p>
+<h3 id="smilescanonicalizernode">SMILESCanonicalizerNode</h3>
+<p><strong>Принимает:</strong> SMILES (String)<br />
+<strong>Выдаёт:</strong> Canonical SMILES (String)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> преобразует любой SMILES в каноническую форму.</p>
+<h3 id="smilesvalidatornode">SMILESValidatorNode</h3>
+<p><strong>Принимает:</strong> SMILES (String)<br />
+<strong>Выдаёт:</strong> Valid (Bool)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> проверяет, является ли строка корректным SMILES.</p>
+<h2 id="similarity">SIMILARITY узлы</h2>
+<h3 id="tanimotosimilaritynode">TanimotoSimilarityNode</h3>
+<p><strong>Принимает:</strong> MolData A (RDKit_Mol), MolData B (RDKit_Mol)<br />
+<strong>Выдаёт:</strong> Tanimoto (Float)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> вычисляет коэффициент Танимото по Morgan-отпечаткам (радиус 2, 2048 бит).</p>
+<h2 id="logic">LOGIC узлы</h2>
+<h3 id="ifnode">IfNode</h3>
+<p><strong>Принимает:</strong> MolData (RDKit_Mol), Pass (Bool)<br />
+<strong>Выдаёт:</strong> True (MolData), False (MolData)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> если Pass=True, молекула появляется на выходе True, иначе на выходе False.</p>
+<h3 id="boolandnode">BoolAndNode</h3>
+<p><strong>Принимает:</strong> A (Bool), B (Bool)<br />
+<strong>Выдаёт:</strong> A AND B (Bool)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> логическое И.</p>
+<h3 id="boolornode">BoolOrNode</h3>
+<p><strong>Принимает:</strong> A (Bool), B (Bool)<br />
+<strong>Выдаёт:</strong> A OR B (Bool)<br />
+<strong>Параметры:</strong> нет<br />
+<strong>Описание:</strong> логическое ИЛИ.</p>
+<h2 id="math">MATH узлы</h2>
+<h3 id="mathnode">MathNode</h3>
+<p><strong>Принимает:</strong> A (Float), B (Float)<br />
+<strong>Выдаёт:</strong> Result (Float)<br />
+<strong>Параметры:</strong> выбор операции (+, -, <em>, /)<br />
+</em><em>Описание:</em>* выполняет арифметическую операцию над двумя числами.</p>
+<h2 id="notes">NOTES узлы</h2>
+<h3 id="stickynotenode">StickyNoteNode</h3>
+<p><strong>Принимает:</strong> –<br />
+<strong>Выдаёт:</strong> –<br />
+<strong>Параметры:</strong> многострочный текст<br />
+<strong>Описание:</strong> текстовая заметка с автоматическим переносом строк. Сохраняется в проекте.</p></p>
+    </article>
+</section>
+<!-- endblock -->
+            
+
+        </main>
+
+        
+        <!-- block preview -->
+    <div class="preview row row-cols-md-3 text-center pt-md-3" id="component-preview">
+        <div class="col themed-grid-col">
+            <a rel="prev" href="../get_started/" class="nav-link">
+                <i class="fa fa-arrow-left"></i> Previous
+            </a>
+        </div>
+        <div class="col themed-grid-col"></div>
+        <div class="col themed-grid-col">
+            <a rel="next" href="../demos/" class="nav-link">
+                Next <i class="fa fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+<!-- endblock -->
+        
+
+        
+        <!-- block footer -->
+<footer class="pt-4 my-md-5 pt-md-5 border-top" id="component-footer">
+    <div class="row">
+        <div class="col-12 col-md">
+                <!-- block copyright -->
+
+    <small class="d-block mb-3">
+        Made with
+        <a href="https://github.com/FernandoCelmer/mkdocs-simple-blog" target="_blank" rel="noopener">
+            Simple Blog for MkDocs
+        </a>
+    </small>
+
+<!-- endblock -->
+        </div>
+    </div>
+</footer>
+<!-- endblock -->
+        
+    </div>
+
+    <script src="../assets/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/main.min.js"></script>
+    <script src="../search/main.js" defer></script>
+
+</body>
+
+</html>
