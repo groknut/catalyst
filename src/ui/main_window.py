@@ -13,6 +13,22 @@ class MainWindow:
         self.pm = project_manager
         self.node_factory = node_factory
         self.groups = groups
+        self.GROUP_COLORS = {
+            "Data I/O":       (70, 130, 180),
+            "RDKit":          (50, 180, 100),
+            "Properties":     (120, 160, 255),
+            "Filters":        (255, 170, 50),
+            "Logic":          (190, 130, 255),
+            "Flow":           (180, 180, 60),
+            "Input":          (80, 220, 200),
+            "Output":         (255, 130, 130),
+            "Math":           (150, 150, 150),
+            "Similarity":     (200, 160, 100),
+            "Cheminformatics":(100, 200, 150),
+            "Notes":          (180, 180, 180),
+            "Constants":      (160, 160, 160),
+            "Text":           (140, 140, 200),
+        }
         self._setup_ui()
 
     def _setup_ui(self):
@@ -98,6 +114,19 @@ class MainWindow:
             dpg.add_key_press_handler(dpg.mvKey_Down, callback=self._handle_move_node)
 
 
+    def _style_node(self, node_id, group):
+        color = self.GROUP_COLORS.get(group, (80, 80, 100))
+        with dpg.theme() as node_theme:
+            with dpg.theme_component(dpg.mvNode):
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBar, color, category=dpg.mvThemeCat_Nodes)
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered,
+                                    tuple(min(c+30,255) for c in color),
+                                    category=dpg.mvThemeCat_Nodes)
+                dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected,
+                                    tuple(min(c+50,255) for c in color),
+                                    category=dpg.mvThemeCat_Nodes)
+        dpg.bind_item_theme(node_id, node_theme)
+
     def _handle_move_node(self, sender, app_data):
         ctrl = dpg.is_key_down(dpg.mvKey_LControl) or dpg.is_key_down(dpg.mvKey_RControl)
         shift = dpg.is_key_down(dpg.mvKey_LShift) or dpg.is_key_down(dpg.mvKey_RShift)
@@ -161,7 +190,9 @@ class MainWindow:
         if node_class is None:
             print("ERROR: Tried to add None node class!")
             return
-        node_class(self.pm.node_manager, node_class.__name__, parent="main_editor")
+        node = node_class(self.pm.node_manager, node_class.__name__, parent="main_editor")
+        self._style_node(node.id, node_class.group)   # ← красим заголовок
+
 
     def _link_callback(self, sender, app_data):
         out_pin, in_pin = app_data
